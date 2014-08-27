@@ -32,6 +32,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadTasks('tasks');
+  grunt.loadTasks('grunt-assets-deployer');
   
   grunt.registerTask('qiniu');
 };
