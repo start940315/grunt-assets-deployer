@@ -1,6 +1,6 @@
 {
   "name": "grunt-assets-deployer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple grunt plugin to deploy assets to qiniu",
   "scripts": {
     "test": "grunt test"
