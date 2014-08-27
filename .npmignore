@@ -7,3 +7,4 @@ Gruntfile.js
 .npmignore
 .jshintrc
 .gitignore
+*.log
