@@ -2,3 +2,8 @@
 test
 *.log
 node_modules/
+Gruntfile.js
+.travis.yml
+.npmignore
+.jshintrc
+.gitignore
