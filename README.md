@@ -27,6 +27,7 @@ module.exports = function (grunt) {
       resources: [
         {
           cwd: 'test/fixtures',
+          prefix: 'public/',
           pattern: '**/*.*'
         }
       ]
