@@ -29,14 +29,14 @@ describe('Deploy resources to qiniu', function () {
 
     var that_done = pending(2, done);
 
-    this.client.download('assets/js/main.js', function (err, data) {
+    this.client.download('public/assets/js/main.js', function (err, data) {
       if (err) { throw err; }
       var expected = fs.readFileSync('./test/fixtures/assets/js/main.js', 'utf8');
       expected.should.equal(data.toString());
       that_done();
     });
 
-    this.client.download('assets/css/main.css', function (err, data) {
+    this.client.download('public/assets/css/main.css', function (err, data) {
       if (err) { throw err; }
       var expected = fs.readFileSync('./test/fixtures/assets/css/main.css', 'utf8');
       expected.should.equal(data.toString());
@@ -46,7 +46,7 @@ describe('Deploy resources to qiniu', function () {
 
   after(function (done) {
     var that_done = pending(2, done);
-    this.client.delete('assets/js/main.js', that_done);
-    this.client.delete('assets/css/main.css', that_done);
+    this.client.delete('public/assets/js/main.js', that_done);
+    this.client.delete('public/assets/css/main.css', that_done);
   });
 });

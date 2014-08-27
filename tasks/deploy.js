@@ -20,8 +20,8 @@ module.exports = function (grunt) {
       timeout: 60 * 1000,
 
       // 生成qiniu上的存储路径(key)
-      keyGen: function (cwd, file) {
-        return file;
+      keyGen: function (cwd, prefix, file) {
+        return prefix + file;
       }
     });
 
@@ -40,6 +40,7 @@ module.exports = function (grunt) {
     // 转换成绝对路径
     resources.forEach(function (res) {
       res.cwd = res.cwd || process.cwd();
+      res.prefix = res.prefix || '';
       if (path.resolve(res.cwd) !== res.cwd) {
         res.cwd = path.join(process.cwd(), res.cwd);
       }
@@ -71,6 +72,7 @@ module.exports = function (grunt) {
 
       resourceFiles.push({
         cwd: o.cwd,
+        prefix: o.prefix,
         files: files
       })
     });
@@ -81,8 +83,9 @@ module.exports = function (grunt) {
     var uploadTasks = [];
     resourceFiles.forEach(function (o) {
       var cwd = o.cwd;
+      var prefix = o.prefix;
       o.files.forEach(function (file) {
-        uploadTasks.push(makeUploadTask(cwd, file));
+        uploadTasks.push(makeUploadTask(cwd, prefix, file));
       })
     });
 
@@ -101,11 +104,11 @@ module.exports = function (grunt) {
     grunt.log.ok('Finished uploading resources !');
 
     // construct upload task
-    function makeUploadTask(cwd, file) {
+    function makeUploadTask(cwd, prefix, file) {
       var absolutePath = path.join(cwd, file);
 
       function doUpload(callback) {
-        var key = options.keyGen(cwd, file);
+        var key = options.keyGen(cwd, prefix, file);
 
         grunt.log.ok('Start uploading file: ' + file);
 
