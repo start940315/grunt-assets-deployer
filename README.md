@@ -6,7 +6,7 @@
 
 ## Usage
 
-```
+```javascript
 'use strict';
 
 var config = require('./test/config');
