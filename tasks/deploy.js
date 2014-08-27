@@ -4,6 +4,8 @@ var qn = require('qn');
 var glob = require('glob');
 var async = require('async');
 var path = require('path');
+var fs = require('fs');
+var crypto = require('crypto');
 
 module.exports = function (grunt) {
 
@@ -96,10 +98,13 @@ module.exports = function (grunt) {
       done(err, results);
     });
 
+    grunt.log.ok('Finished uploading resources !');
+
     // construct upload task
     function makeUploadTask(cwd, file) {
+      var absolutePath = path.join(cwd, file);
+
       function doUpload(callback) {
-        var absolutePath = path.join(cwd, file);
         var key = options.keyGen(cwd, file);
 
         grunt.log.ok('Start uploading file: ' + file);
@@ -113,10 +118,39 @@ module.exports = function (grunt) {
       }
 
       return function (callback) {
-        client.stat(file, function () {
-          doUpload(callback);
+        client.stat(file, function (err, stat) {
+          if (err || stat.error) {
+            doUpload(callback);
+          } else {
+            // 只有当文件有变化的时候才更新
+            var currentFileHash = qiniuFileEtag(absolutePath);
+            if (stat.hash != currentFileHash) {
+              client.delete(file, function (err) {
+                if (!err) {
+                  doUpload(callback);
+                }
+              });
+            }
+          }
         });
       }
+    }
+
+    // 计算七牛文件HASH值，以便对同名文件进行更新
+    function qiniuFileEtag(file) {
+      var f = fs.readFileSync(file);
+
+      if (f.length > (1 << 22)) {
+        return false;
+      }
+
+      var shasum = crypto.createHash('sha1');
+      shasum.update(f);
+      var sha1 = shasum.digest();
+      var hash = new Buffer(1 + sha1.length);
+      hash[0] = 0x16;
+      sha1.copy(hash, 1);
+      return hash.toString('base64').replace('+', '-').replace('/', '_');
     }
   })
 };
