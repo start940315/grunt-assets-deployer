@@ -14,7 +14,13 @@
     "gruntplugin",
     "qiniu"
   ],
-  "author": "Novtopro He",
+  "author": {
+    "name": "Novtopro He",
+    "email": "novtopro@gmail.com"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Novtopro/grunt-assets-deployer/issues"
