@@ -1,0 +1,36 @@
+{
+  "name": "grunt-assets-deployer",
+  "version": "0.0.0",
+  "description": "A simple grunt plugin to deploy assets to qiniu",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Novtopro/grunt-assets-deployer.git"
+  },
+  "keywords": [
+    "gruntplugin",
+    "qiniu"
+  ],
+  "author": "Novtopro He",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Novtopro/grunt-assets-deployer/issues"
+  },
+  "homepage": "https://github.com/Novtopro/grunt-assets-deployer",
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-mocha-test": "0.11.0",
+    "mocha": "1.21.4",
+    "should": "4.0.4"
+  },
+  "dependencies": {
+    "qn": "0.2.2",
+    "glob": "4.0.5",
+    "async": "0.9.0"
+  }
+}
