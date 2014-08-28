@@ -139,6 +139,8 @@ module.exports = function (grunt) {
 
     // 计算七牛文件HASH值，以便对同名文件进行更新
     function qiniuFileEtag(file) {
+
+      // TODO 使用异步的方式会比较好
       var f = fs.readFileSync(file);
 
       if (f.length > (1 << 22)) {
