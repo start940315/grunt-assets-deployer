@@ -27,6 +27,7 @@ module.exports = function (grunt) {
       resources: [
         {
           cwd: 'test/fixtures',
+          // 上传到七牛后加上指定前缀, 如上传assets/css/main.css, 上传之后的URL变成 http://bucket_name.qiniudn.com/public/assets/css/main.css
           prefix: 'public/',
           pattern: '**/*.*'
         }
