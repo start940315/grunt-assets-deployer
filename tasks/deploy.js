@@ -101,8 +101,6 @@ module.exports = function (grunt) {
       done(err, results);
     });
 
-    grunt.log.ok('Finished uploading resources !');
-
     // construct upload task
     function makeUploadTask(cwd, prefix, file) {
       var absolutePath = path.join(cwd, file);
